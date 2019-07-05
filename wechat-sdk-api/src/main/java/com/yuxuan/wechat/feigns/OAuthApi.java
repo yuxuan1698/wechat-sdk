@@ -1,5 +1,6 @@
 package com.yuxuan.wechat.feigns;
 
+import com.yuxuan.wechat.annotations.Domain;
 import com.yuxuan.wechat.models.AccessToken;
 import com.yuxuan.wechat.models.CodeSession;
 import com.yuxuan.wechat.models.UserInfo;
@@ -12,6 +13,7 @@ import feign.RequestLine;
  * @author yuxuan
  * @date 2019/5/22
  */
+@Domain("https://api.weixin.qq.com")
 public interface OAuthApi {
     /**
      * 通过code换取网页授权access_token

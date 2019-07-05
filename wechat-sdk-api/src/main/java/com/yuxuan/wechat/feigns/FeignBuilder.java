@@ -1,5 +1,6 @@
 package com.yuxuan.wechat.feigns;
 
+import com.yuxuan.wechat.annotations.Domain;
 import com.yuxuan.wechat.feigns.coders.WeChatDecoder;
 import com.yuxuan.wechat.feigns.coders.WeChatEncoder;
 import com.yuxuan.wechat.feigns.coders.WeChatErrDecoder;
@@ -14,10 +15,6 @@ import feign.Request;
  * @date 2019/5/22
  */
 public class FeignBuilder {
-    /**
-     * 接口请求地址
-     */
-    public static final String API_URL = "https://api.weixin.qq.com";
 
     /**
      * 创建tokenApi
@@ -50,6 +47,6 @@ public class FeignBuilder {
                 .decoder(new WeChatDecoder())
                 .errorDecoder(new WeChatErrDecoder())
                 .options(new Request.Options(5000, 20000))
-                .target(apiType, API_URL);
+                .target(apiType, apiType.getAnnotation(Domain.class).value());
     }
 }

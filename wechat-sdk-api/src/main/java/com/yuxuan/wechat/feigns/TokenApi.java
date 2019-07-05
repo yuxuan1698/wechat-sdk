@@ -1,5 +1,6 @@
 package com.yuxuan.wechat.feigns;
 
+import com.yuxuan.wechat.annotations.Domain;
 import com.yuxuan.wechat.models.IPList;
 import com.yuxuan.wechat.models.JsApiTicket;
 import com.yuxuan.wechat.models.Token;
@@ -13,6 +14,7 @@ import feign.RequestLine;
  * @author yuxuan
  * @date 2019/5/22
  */
+@Domain("https://api.weixin.qq.com")
 public interface TokenApi {
 
     /**
