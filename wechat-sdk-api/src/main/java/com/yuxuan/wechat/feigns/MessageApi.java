@@ -2,6 +2,7 @@ package com.yuxuan.wechat.feigns;
 
 import com.yuxuan.wechat.annotations.Domain;
 import com.yuxuan.wechat.models.AppletMessage;
+import feign.Body;
 import feign.Param;
 import feign.RequestLine;
 
@@ -14,6 +15,7 @@ import java.util.Map;
 @Domain("https://api.weixin.qq.com")
 public interface MessageApi {
 
-    @RequestLine("POST https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=ACCESS_TOKEN")
-    Map<String, Object> sentAppletMessage(@Param("accessToken") String accessToken, AppletMessage appletMessage);
+    @RequestLine("POST /cgi-bin/message/wxopen/template/send")
+    @Body("appletMessage")
+    Map<String, Object> sendAppletMessage(@Param("access_token") String access_token, @Param("appletMessage") AppletMessage appletMessage);
 }
