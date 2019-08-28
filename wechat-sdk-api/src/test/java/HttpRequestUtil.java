@@ -10,14 +10,13 @@ import java.util.Map;
 
 public class HttpRequestUtil {
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //发送 GET 请求
-        String s=HttpRequestUtil.sendGet("http://localhost:8080/Home/RequestString", "key=123&v=456");
+        String s = HttpRequestUtil.sendGet("http://localhost:8080/Home/RequestString", "key=123&v=456");
         System.out.println(s);
 
         //发送 POST 请求
-        String sr=HttpRequestUtil.sendPost("http://localhost:8080/Home/RequestPostString", "application/text", "key=123&v=456");
+        String sr = HttpRequestUtil.sendPost("http://localhost:8080/Home/RequestPostString", "application/text", "key=123&v=456");
         System.out.println(sr);
     }
 
@@ -25,10 +24,8 @@ public class HttpRequestUtil {
     /**
      * 向指定URL发送GET方法的请求
      *
-     * @param url
-     *            发送请求的URL
-     * @param param
-     *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @param url   发送请求的URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url, String param) {
@@ -79,10 +76,8 @@ public class HttpRequestUtil {
     /**
      * 向指定 URL 发送POST方法的请求
      *
-     * @param url
-     *            发送请求的 URL
-     * @param param
-     *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @param url   发送请求的 URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
     public static String sendPost(String url, String contentType, String param) {
@@ -92,7 +87,7 @@ public class HttpRequestUtil {
         try {
             URL realUrl = new URL(url);
             // 打开和URL之间的连接
-            HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
             // 设置通用的请求属性
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
@@ -111,7 +106,7 @@ public class HttpRequestUtil {
             //获取状态码
             int status = conn.getResponseCode();
             //200至300表示请求成功
-            if(status >= 200 && status < 300){
+            if (status >= 200 && status < 300) {
                 System.out.println("POST请求成功，http响应状态码：" + status + ";响应信息：" + conn.getResponseMessage());
                 // 定义BufferedReader输入流来读取URL的响应
                 in = new BufferedReader(
@@ -120,25 +115,24 @@ public class HttpRequestUtil {
                 while ((line = in.readLine()) != null) {
                     result += line;
                 }
-            }else {
+            } else {
                 System.out.println("POST请求失败异常，http响应状态码：" + status);
                 throw new Exception("POST请求失败异常，http响应状态码：" + status);
             }
         } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！"+e);
+            System.out.println("发送 POST 请求出现异常！" + e);
             e.printStackTrace();
         }
         //使用finally块来关闭输出流、输入流
-        finally{
-            try{
-                if(out!=null){
+        finally {
+            try {
+                if (out != null) {
                     out.close();
                 }
-                if(in!=null){
+                if (in != null) {
                     in.close();
                 }
-            }
-            catch(IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
