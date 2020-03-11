@@ -3,6 +3,7 @@ package com.yuxuan.wechat.feigns;
 import com.yuxuan.wechat.annotations.Domain;
 import com.yuxuan.wechat.models.AppletMessage;
 import com.yuxuan.wechat.models.BaseResult;
+import com.yuxuan.wechat.models.CustomMessage;
 import com.yuxuan.wechat.models.WechatMessage;
 import com.yuxuan.wechat.models.WechatMessageResult;
 import feign.Body;
@@ -39,4 +40,15 @@ public interface MessageApi {
     @RequestLine("POST /cgi-bin/message/template/send")
     @Body("wechatMessage")
     WechatMessageResult sendWechatMesssage(@Param("access_token") String access_token, @Param("wechatMessage") WechatMessage wechatMessage);
+
+	/**
+     * 发送公众号客服消息
+     *
+     * @param access_token
+     * @param wechatMessage
+     * @return
+     */
+    @RequestLine("POST /cgi-bin/message/custom/send")
+    @Body("customMessage")
+    WechatMessageResult sendCustomMesssage(@Param("access_token") String access_token, @Param("customMessage") CustomMessage customMessage);
 }
